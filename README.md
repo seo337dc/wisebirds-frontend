@@ -6,7 +6,7 @@
 
 ## 흐름도
 
-![flow](./assets/flow.png)
+![flow](./src/assets/flow.png)
 
 ## API 목록
 
