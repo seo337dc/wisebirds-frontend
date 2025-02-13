@@ -1,3 +1,7 @@
+import QueryProvider from "@/util/QueryClientProvider";
+import GlobalStyleWrapper from "@/styles/GlobalStyleWrapper";
+import StyledComponentsRegistry from "@/styles/StyledComponentsRegistry";
+
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -27,7 +31,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <QueryProvider>
+          <StyledComponentsRegistry>
+            <GlobalStyleWrapper>{children}</GlobalStyleWrapper>
+          </StyledComponentsRegistry>
+        </QueryProvider>
       </body>
     </html>
   );
