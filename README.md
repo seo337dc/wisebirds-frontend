@@ -1,3 +1,31 @@
+# 과제 결과 및 내용
+
+## 사용한 기술 스택 및 선택 이유
+
+### 🛠 사용한 언어 및 프레임워크
+
+- Framework: Next.js
+- State Management: Zustand, React Query
+- Styling: Tailwind CSS, Styled-components
+
+### 🔍 기술 선택 이유
+
+- Next.js:
+
+  - 서버 사이드 렌더링(SSR)과 정적 사이트 생성(SSG)을 활용하여 성능 최적화 가능
+  - 파일 기반 라우팅으로 구조적인 코드 작성 가능
+
+- Zustand & React Query:
+
+  - Zustand: 사용이 간편하고 가벼우며, 전역 상태 관리를 효율적으로 수행 가능
+  - React Query: API 데이터 캐싱 및 비동기 상태 관리를 효과적으로 관리
+
+- Tailwind CSS & Styled-components:
+  - Styled-components: 동적인 스타일 변경이 필요한 컴포넌트에 적합
+  - Tailwind CSS: 유틸리티 클래스를 활용하여 간결한 스타일링 가능
+
+---
+
 # 프론트엔드 과제시험: 투자일지 웹 서비스
 
 ## 목표
