@@ -1,3 +1,5 @@
+import Layout from "@/components/common/Layout";
+
 import QueryProvider from "@/util/QueryClientProvider";
 import GlobalStyleWrapper from "@/styles/GlobalStyleWrapper";
 import StyledComponentsRegistry from "@/styles/StyledComponentsRegistry";
@@ -33,7 +35,9 @@ export default function RootLayout({
       >
         <QueryProvider>
           <StyledComponentsRegistry>
-            <GlobalStyleWrapper>{children}</GlobalStyleWrapper>
+            <GlobalStyleWrapper>
+              <Layout>{children}</Layout>
+            </GlobalStyleWrapper>
           </StyledComponentsRegistry>
         </QueryProvider>
       </body>
