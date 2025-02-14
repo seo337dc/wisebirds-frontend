@@ -1,19 +1,18 @@
-import { usePathname } from "next/navigation";
-import { styled } from "styled-components";
+import { LineButton } from "@/components/ui/Button";
+
 import { Colors } from "@/util/constant";
-import { LinkButton } from "@/components/ui/Button";
+import Login from "../template/Login";
+import { useModalStore } from "@/store/modalStore";
+import styled from "styled-components";
 
 const Header = () => {
-  const pathName = usePathname();
+  const { isOpen, onOpen } = useModalStore();
 
   return (
     <Wrap>
-      <LinkButton href="/" currentPage={pathName === "/"}>
-        회원가입
-      </LinkButton>
-      <LinkButton href="/" currentPage={pathName === "/wish"}>
-        로그인
-      </LinkButton>
+      {isOpen && <Login />}
+      <LineButton onClick={onOpen}>회원가입</LineButton>
+      <LineButton onClick={() => {}}>로그인</LineButton>
     </Wrap>
   );
 };
@@ -35,9 +34,4 @@ const Wrap = styled.div`
   background-color: ${Colors.White};
 
   z-index: 2;
-`;
-
-const LogoText = styled.p`
-  font-weight: 700;
-  font-size: 24px;
 `;

@@ -3,6 +3,8 @@
 
 // import type { ChangeEvent, KeyboardEvent } from "react";
 
+import { useState } from "react";
+import Icon from "./Icon";
 import * as S from "./Input.styles";
 // import { useSearchHistoryStore } from "@/store/useSearchHistoryStore";
 
@@ -26,6 +28,25 @@ const Input = ({ value, placeholder, onChange }: TProps) => {
 };
 
 export default Input;
+
+export const InputPassword = ({ value, placeholder, onChange }: TProps) => {
+  const [isShow, setIsShow] = useState(false);
+  return (
+    <div className={"w-full relative"}>
+      <S.StyledInput
+        type={isShow ? "text" : "password"}
+        placeholder={placeholder}
+        onChange={(e) => onChange(e.target.value)}
+        value={value || "aaaaa"}
+      />
+      <S.EyeImg
+        onClick={() => setIsShow(!isShow)}
+        src="/assets/images/eye_off.png"
+        alt="eye_off"
+      />
+    </div>
+  );
+};
 
 /**
  * 검색 input 컴포넌트

@@ -1,19 +1,30 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
+
 import { Colors } from "@/util/constant";
+import Icon from "./Icon";
 
 export const StyledInput = styled.input`
   width: 100%;
-  max-width: 400px;
+
+  background-color: ${Colors.White};
+  border-radius: 5px;
   font-size: 16px;
   color: #8d94a0;
-  padding: 10px 0;
-  border: none;
-  border-bottom: 2px solid ${Colors.PalletPrimary};
+  padding: 10px 12px;
+  border: 1px solid ${Colors.Neutral3};
   outline: none;
 
   &::placeholder {
-    color: #8d94a0;
+    color: ${Colors.White};
   }
+`;
+
+export const EyeImg = styled.img`
+  position: absolute;
+  z-index: 4;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 `;
 
 export const SearchInputWrapper = styled.div<{ $isOpen: boolean }>`

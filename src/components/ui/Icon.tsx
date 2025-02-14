@@ -1,6 +1,6 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 
-const IMG_URL = "@/assets/images";
+const IMG_URL = "/assets/images";
 
 type TProps = {
   fileName: string;

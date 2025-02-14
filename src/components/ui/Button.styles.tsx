@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { styled } from "styled-components";
+
 import { Colors } from "@/util/constant";
+import styled from "styled-components";
 
 export const ButtonWrap = styled.button<{
   width: string;
@@ -39,6 +40,13 @@ export const LinkText = styled(Link)<{ $currentPage: boolean }>`
 
   border-bottom: 1px solid
     ${({ $currentPage }) => ($currentPage ? Colors.LinkLine : Colors.White)};
+`;
+
+export const LineBtn = styled.button`
+  height: 35px;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
 `;
 
 export const BadgeBtn = styled(Link)`
