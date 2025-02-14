@@ -13,6 +13,7 @@ export const Colors = {
 
   Red: "#E84118",
 
+  Neutral3: "#BEBEBE",
   Neutral5: "#505050",
   NeutralE: "#E0E0E0",
 };

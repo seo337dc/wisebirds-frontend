@@ -64,6 +64,15 @@ export const LinkButton = ({ href, children, currentPage }: TPropsLinkBtn) => {
   );
 };
 
+type TLineBtnProps = {
+  onClick: () => void;
+  children: React.ReactNode;
+};
+
+export const LineButton = ({ onClick, children }: TLineBtnProps) => {
+  return <S.LineBtn onClick={onClick}>{children}</S.LineBtn>;
+};
+
 type TBadgeBtnProps = {
   href: string;
   children: React.ReactNode;

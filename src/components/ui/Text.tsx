@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 type TProps = {
   children: React.ReactNode;
@@ -23,7 +23,7 @@ const Text = ({
       color={color}
       size={size}
       weight={weight}
-      $lineThrough={lineThrough} // ✅ styled-components에서 props 넘길 때 $ 접두사 사용
+      $lineThrough={lineThrough}
     >
       {children}
     </TextContent>
@@ -33,7 +33,7 @@ const Text = ({
 export default Text;
 
 type TextType = Pick<TProps, "color" | "size" | "weight"> & {
-  $lineThrough?: boolean; // ✅ styled-components는 props 앞에 `$` 접두사 필요
+  $lineThrough?: boolean;
 };
 
 const TextContent = styled.span<TextType>`
