@@ -14,15 +14,18 @@ class ApiClient {
   constructor() {
     this.client = axios.create({
       baseURL: BASE_URL,
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded", // 요청 타입
+        Accept: "application/json",
+      },
     });
 
     // 요청 인터셉터 설정 (토큰 적용)
     this.client.interceptors.request.use(
       (config) => {
-        const { token } = useAuthStore.getState();
-        if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
+        const { authInfo } = useAuthStore.getState();
+        if (authInfo) {
+          config.headers.Authorization = `Bearer ${authInfo.token}`;
         }
         return config;
       },
@@ -31,7 +34,22 @@ class ApiClient {
 
     // 응답 인터셉터 설정
     this.client.interceptors.response.use(
-      (response) => response,
+      (response) => {
+        const { error, message, status } = response.data;
+
+        if (error) {
+          console.error(
+            `API 내부 오류: ${message} (상태 코드: ${status || "알 수 없음"})`
+          );
+          return Promise.reject({
+            status: status || 200,
+            message: message || "서버에서 실패 응답을 반환했습니다.",
+            error: error || "Unknown API Error",
+          });
+        }
+
+        return response;
+      },
       (error) => {
         console.error("API 오류:", error);
         return Promise.reject(error);
