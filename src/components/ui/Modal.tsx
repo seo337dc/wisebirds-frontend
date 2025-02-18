@@ -2,10 +2,12 @@ import styled from "styled-components";
 import { Colors } from "@/util/constant";
 import Icon from "./Icon";
 
-type TProps = {
-  onClose?: () => void;
+import type { TModalProps } from "@/model/common";
+
+interface TProps extends TModalProps {
   children?: React.ReactNode;
-};
+}
+
 const Modal = ({ onClose, children }: TProps) => {
   return (
     <Overlay>
