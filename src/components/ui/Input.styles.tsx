@@ -12,10 +12,6 @@ export const StyledInput = styled.input`
   padding: 10px 12px;
   border: 1px solid ${Colors.Neutral3};
   outline: none;
-
-  &::placeholder {
-    color: ${Colors.White};
-  }
 `;
 
 export const EyeImg = styled.img`

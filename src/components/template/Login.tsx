@@ -10,7 +10,7 @@ import { AuthApi } from "@/api/auth";
 import { useAuthStore } from "@/store/authStore";
 import { useLoadingStore } from "@/store/loadingStore";
 
-import { REG_EMAIL } from "@/util/constant";
+import { REG_BAN_KR, REG_EMAIL, REG_PWD_NUM } from "@/util/constant";
 import type { TApiError, TModalProps } from "@/model/common";
 import type { ModelSignInReq } from "@/model/auth";
 
@@ -39,11 +39,15 @@ const Login = ({ onClose }: TModalProps) => {
   });
 
   const handleEmail = (emailValue: string) => {
-    setLoginInfo({ ...loginInfo, email: emailValue });
+    if (!/\s/.test(emailValue) && !REG_BAN_KR.test(emailValue)) {
+      setLoginInfo({ ...loginInfo, email: emailValue });
+    }
   };
 
   const handlePwd = (pwdValue: string) => {
-    setLoginInfo({ ...loginInfo, password: pwdValue });
+    if (REG_PWD_NUM.test(pwdValue)) {
+      setLoginInfo({ ...loginInfo, password: pwdValue });
+    }
   };
 
   const onSubmit = () => {
@@ -71,7 +75,11 @@ const Login = ({ onClose }: TModalProps) => {
             <Text className="w-[120px] flex items-center justify-center">
               이메일
             </Text>
-            <Input value={loginInfo.email} onChange={handleEmail} />
+            <Input
+              value={loginInfo.email}
+              onChange={handleEmail}
+              placeholder="이메일을 입력하세요."
+            />
           </div>
 
           <div className="flex justify-between">
