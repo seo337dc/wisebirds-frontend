@@ -1,45 +1,21 @@
 "use client";
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import { useEffect, useRef } from "react";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-
-import type { ReactNode } from "react";
-
-interface IQueryProviderProps {
-  children: ReactNode;
-}
-
-const QueryProvider = ({ children }: IQueryProviderProps) => {
-  const queryClientRef = useRef<QueryClient | null>(null);
-
-  useEffect(() => {
-    if (!queryClientRef.current) {
-      queryClientRef.current = new QueryClient({
+export default function Providers({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
         defaultOptions: {
           queries: {
-            retry: 1, // 재시도 횟수
+            retry: 1,
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
           },
         },
-        queryCache: new QueryCache({
-          onError: (error) => {
-            console.error("QueryCache 에러 발생:", error);
-          },
-        }),
-      });
-    }
-  }, []);
-
-  return queryClientRef.current ? (
-    <QueryClientProvider client={queryClientRef.current}>
-      {children}
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  ) : null;
-};
-
-export default QueryProvider;
+      })
+  );
+  return (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+}
