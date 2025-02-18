@@ -1,14 +1,13 @@
+import { useRouter } from "next/navigation";
 import { Fragment, useState } from "react";
 import styled from "styled-components";
 
 import { LineButton } from "@/components/ui/Button";
-
 import Login from "../template/Login";
 import Signup from "../template/Signup";
 
-import { Colors } from "@/util/constant";
 import { useAuthStore } from "@/store/authStore";
-import { useRouter } from "next/navigation";
+import { Colors } from "@/util/constant";
 
 const Header = () => {
   const router = useRouter();
@@ -45,7 +44,7 @@ const Wrap = styled.div`
   top: 0;
   width: 100%;
   height: 5rem /* 80px */;
-  padding: 0 200px;
+  padding: 0 100px;
 
   display: flex;
   justify-content: end;

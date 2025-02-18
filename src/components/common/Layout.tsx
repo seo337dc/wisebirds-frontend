@@ -25,6 +25,6 @@ const Layout = ({ children }: TProps) => {
 export default Layout;
 
 const Wrap = styled.div`
-  min-height: calc(100vh - 80px);
+  height: calc(100vh - 80px);
   margin-top: 120px;
 `;
