@@ -21,8 +21,11 @@
   - React Query: API 데이터 캐싱 및 비동기 상태 관리를 효과적으로 관리
 
 - Tailwind CSS & Styled-components:
+
   - Styled-components: 동적인 스타일 변경이 필요한 컴포넌트에 적합
   - Tailwind CSS: 유틸리티 클래스를 활용하여 간결한 스타일링 가능
+
+  ## 기능 설명
 
 ---
 
@@ -34,7 +37,7 @@
 
 ## 흐름도
 
-![flow](./src/assets/flow.png)
+![flow](./public/assets/flow.png)
 
 ## API 목록
 
