@@ -65,7 +65,7 @@ const Login = ({ onClose }: TModalProps) => {
     if (isPending) {
       onLoading("로그인 중입니다.");
     }
-  }, [isPending]);
+  }, [isPending, onLoading]);
 
   return (
     <Modal onClose={onClose}>

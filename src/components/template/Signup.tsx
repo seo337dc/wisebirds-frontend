@@ -23,11 +23,11 @@ const Signup = ({ onClose }: TModalProps) => {
     mutationKey: ["signUp"],
     mutationFn: AuthApi.signUp,
     onSettled: onCloseLoading,
-    onSuccess: (data) => {
+    onSuccess: () => {
       alert("회원가입을 완료하였습니다. 로그인 해주시길 바랍니다.");
       onClose();
     },
-    onError: (err) => {
+    onError: () => {
       alert("중복된 이메일 입니다."); // 에러처리가 너무 다름
     },
   });
@@ -83,7 +83,7 @@ const Signup = ({ onClose }: TModalProps) => {
     if (isPending) {
       onLoading("회원가입 중...");
     }
-  }, [isPending]);
+  }, [isPending, onLoading]);
   return (
     <Modal onClose={onClose}>
       <div className="min-w-[400px]">
