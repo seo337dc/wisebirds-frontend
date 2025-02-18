@@ -4,7 +4,6 @@
 // import type { ChangeEvent, KeyboardEvent } from "react";
 
 import { useState } from "react";
-import Icon from "./Icon";
 import * as S from "./Input.styles";
 // import { useSearchHistoryStore } from "@/store/useSearchHistoryStore";
 

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 interface ModalState {
+  type?: string;
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;

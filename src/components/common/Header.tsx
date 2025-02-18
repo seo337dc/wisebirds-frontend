@@ -1,18 +1,23 @@
-import { LineButton } from "@/components/ui/Button";
-
-import { Colors } from "@/util/constant";
-import Login from "../template/Login";
-import { useModalStore } from "@/store/modalStore";
+import { useState } from "react";
 import styled from "styled-components";
 
+import { LineButton } from "@/components/ui/Button";
+
+import Login from "../template/Login";
+import Signup from "../template/Signup";
+
+import { Colors } from "@/util/constant";
+
 const Header = () => {
-  const { isOpen, onOpen } = useModalStore();
+  const [openLogin, setOpenLogin] = useState(false);
+  const [openSignup, setOpenSignup] = useState(false);
 
   return (
     <Wrap>
-      {isOpen && <Login />}
-      <LineButton onClick={onOpen}>회원가입</LineButton>
-      <LineButton onClick={() => {}}>로그인</LineButton>
+      {openLogin && <Login onClose={() => setOpenLogin(false)} />}
+      {openSignup && <Signup onClose={() => setOpenSignup(false)} />}
+      <LineButton onClick={() => setOpenSignup(true)}>회원가입</LineButton>
+      <LineButton onClick={() => setOpenLogin(true)}>로그인</LineButton>
     </Wrap>
   );
 };

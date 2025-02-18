@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 import { Colors } from "@/util/constant";
-import Icon from "./Icon";
 
 export const StyledInput = styled.input`
   width: 100%;
