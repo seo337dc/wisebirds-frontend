@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import styled from "styled-components";
 
 import { LineButton } from "@/components/ui/Button";
@@ -7,17 +7,33 @@ import Login from "../template/Login";
 import Signup from "../template/Signup";
 
 import { Colors } from "@/util/constant";
+import { useAuthStore } from "@/store/authStore";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
+  const { authInfo, clearToken } = useAuthStore();
   const [openLogin, setOpenLogin] = useState(false);
   const [openSignup, setOpenSignup] = useState(false);
+
+  const handleLogout = () => {
+    clearToken();
+    router.push("/");
+  };
 
   return (
     <Wrap>
       {openLogin && <Login onClose={() => setOpenLogin(false)} />}
       {openSignup && <Signup onClose={() => setOpenSignup(false)} />}
-      <LineButton onClick={() => setOpenSignup(true)}>회원가입</LineButton>
-      <LineButton onClick={() => setOpenLogin(true)}>로그인</LineButton>
+
+      {authInfo ? (
+        <LineButton onClick={handleLogout}>로그아웃</LineButton>
+      ) : (
+        <Fragment>
+          <LineButton onClick={() => setOpenSignup(true)}>회원가입</LineButton>
+          <LineButton onClick={() => setOpenLogin(true)}>로그인</LineButton>
+        </Fragment>
+      )}
     </Wrap>
   );
 };

@@ -1,6 +1,8 @@
 "use client";
 
+import { useLoadingStore } from "@/store/loadingStore";
 import styled from "styled-components";
+import Loading from "../ui/Loading";
 import Header from "./Header";
 
 type TProps = {
@@ -8,8 +10,12 @@ type TProps = {
 };
 
 const Layout = ({ children }: TProps) => {
+  const { isLoading, text } = useLoadingStore();
+
   return (
     <div className="relative min-h-screen">
+      {isLoading && <Loading text={text} />}
+
       <Header />
       <Wrap>{children}</Wrap>
     </div>

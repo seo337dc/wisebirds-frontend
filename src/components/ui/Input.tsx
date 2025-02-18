@@ -36,7 +36,7 @@ export const InputPassword = ({ value, placeholder, onChange }: TProps) => {
         type={isShow ? "text" : "password"}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
-        value={value || "aaaaa"}
+        value={value}
       />
       <S.EyeImg
         onClick={() => setIsShow(!isShow)}

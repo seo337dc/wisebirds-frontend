@@ -21,3 +21,5 @@ export const Colors = {
 export enum ScreenBoundary {
   Phone2PC = "375px",
 }
+
+export const REG_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // 이메일 정규식

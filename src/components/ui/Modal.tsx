@@ -36,7 +36,7 @@ const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 900;
 `;
 
 const Content = styled.div`
