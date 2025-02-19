@@ -1,20 +1,22 @@
 import moment from "moment";
 import { styled } from "styled-components";
 import { Colors } from "@/util/constant";
+import { useDiaryStore } from "@/store/diaryStore";
 import type { ModelDiary } from "@/model/diary";
 
 type TProps = {
   diary: ModelDiary;
 };
 const Dairy = ({ diary }: TProps) => {
-  console.log("diary", diary);
+  const { setDiary } = useDiaryStore();
+
   return (
-    <Wrap>
+    <Wrap onClick={() => setDiary(diary)}>
       <Date>
         {moment(diary.date || diary.created_at).format("YYYY-MM-DD hh:mm")}
       </Date>
 
-      <Title>{diary.title}</Title>
+      <Title>{diary.title || "제목 없음"}</Title>
       <Content>{diary.contents}</Content>
     </Wrap>
   );
@@ -33,6 +35,7 @@ const Wrap = styled.div`
 
   cursor: pointer;
 `;
+
 const Date = styled.p`
   padding: 4px;
   text-align: end;

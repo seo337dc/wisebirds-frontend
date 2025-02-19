@@ -1,10 +1,10 @@
 import { apiClient } from "..";
+import type { ModelInvestment } from "@/model/investment";
 
 export class InvestmentApi {
-  public static async list(params: any, signal?: AbortSignal): Promise<any> {
-    return await apiClient.post<any>("/users/login", {
-      ...params,
-      signal,
-    });
+  public static async list(diaryId: number): Promise<ModelInvestment[]> {
+    return await apiClient.get<ModelInvestment[]>(
+      `/diaries/${diaryId}/assets.json`
+    );
   }
 }
