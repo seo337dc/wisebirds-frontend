@@ -1,10 +1,10 @@
 import { create } from "zustand";
-import type { TAssestCreateDiary } from "@/model/asset";
+import type { TAssestInfo } from "@/model/asset";
 
 interface AssetsState {
-  assets: TAssestCreateDiary[];
-  setAssets: (assets: TAssestCreateDiary[]) => void;
-  updateAssets: (id: number, updatedAsset: Partial<TAssestCreateDiary>) => void;
+  assets: TAssestInfo[];
+  setAssets: (assets: TAssestInfo[]) => void;
+  updateAssets: (id: number, updatedAsset: Partial<TAssestInfo>) => void;
   clearAssets: () => void;
 }
 
@@ -27,7 +27,7 @@ export const useAssetStore = create<AssetsState>((set) => ({
                   key,
                   typeof value === "number" && !isNaN(value)
                     ? value
-                    : asset[key as keyof TAssestCreateDiary],
+                    : asset[key as keyof TAssestInfo],
                 ])
               ),
             }

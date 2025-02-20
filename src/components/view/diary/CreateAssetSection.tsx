@@ -33,6 +33,7 @@ const CreateAssetSection = () => {
         <thead>
           <tr>
             <Th>종목 티커명</Th>
+            <Th>가격</Th>
             <Th>수량</Th>
             <Th>매수 가격</Th>
           </tr>
@@ -41,7 +42,17 @@ const CreateAssetSection = () => {
           {assets.length > 0 &&
             assets.map((asset) => (
               <tr key={asset.id}>
-                <Td>{asset.ticker}</Td>
+                <Td>
+                  <p className="font-bold">{asset.name}</p>
+                  <p>({asset.ticker})</p>
+                </Td>
+                <Td>
+                  <Input
+                    value={`$${Number(asset.price).toLocaleString()}`}
+                    disable
+                  />
+                </Td>
+
                 <Td>
                   <Input
                     value={asset.amount.toString()}
@@ -55,8 +66,17 @@ const CreateAssetSection = () => {
                 </Td>
                 <Td>
                   <Input
-                    value={`$${Number(asset.buy_price).toLocaleString()}`}
-                    disable
+                    value={asset.buy_price.toString()} // 문자열로 변환하여 표시
+                    onChange={(value) => {
+                      const numericValue = value.replace(/[^0-9.]/g, ""); // 숫자와 소수점만 허용
+                      console.log("numericValue", numericValue);
+                      if (!isNaN(Number(numericValue))) {
+                        updateAssets(asset.id, {
+                          ...asset,
+                          buy_price: Number(numericValue), // 숫자로 변환 후 상태 업데이트
+                        });
+                      }
+                    }}
                   />
                 </Td>
               </tr>

@@ -24,8 +24,11 @@ export type ModelAssetsReq = {
   diary_id: number;
   asset_id: number;
   amount: number;
-  buy_price: string;
+  buy_price: number;
 };
 
-export type TAssestCreateDiary = Pick<ModelAssetRes, "ticker" | "name" | "id"> &
+export type TAssestInfo = Pick<
+  ModelAssetRes,
+  "ticker" | "name" | "id" | "price"
+> &
   Pick<ModelAssetsReq, "amount" | "buy_price" | "asset_id">;

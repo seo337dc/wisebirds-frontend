@@ -8,7 +8,7 @@ import Button from "@/components/ui/Button";
 
 import { AssetApi } from "@/api/asset";
 import { useAssetStore } from "@/store/assetStore";
-import type { TAssestCreateDiary } from "@/model/asset";
+import type { TAssestInfo } from "@/model/asset";
 
 type TProps = {
   onClose: () => void;
@@ -33,7 +33,7 @@ const AssetModal = ({ onClose }: TProps) => {
   };
 
   const handleConfirm = () => {
-    const filterAssets: TAssestCreateDiary[] = assets
+    const filterAssets: TAssestInfo[] = assets
       .filter((asset) => selectedAssets.includes(Number(asset.id)))
       .map((assetInfo) => ({
         ticker: assetInfo.ticker,
@@ -41,7 +41,8 @@ const AssetModal = ({ onClose }: TProps) => {
         id: assetInfo.id,
         amount: 0,
         asset_id: assetInfo.id,
-        buy_price: assetInfo.price,
+        buy_price: 0,
+        price: assetInfo.price,
       }));
     setAssets(filterAssets);
     onClose();

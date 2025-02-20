@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import { styled } from "styled-components";
 import Button from "../ui/Button";
+import Loading from "../ui/Loading";
 import { AssetApi } from "@/api/asset";
 import { Colors } from "@/util/constant";
-import type { ModelAssetByDiary } from "@/model/asset";
-import Loading from "../ui/Loading";
+import type { TAssestInfo } from "@/model/asset";
 
 type TProps = {
-  assest: ModelAssetByDiary;
+  assest: TAssestInfo;
   onReset: () => void;
 };
 const AssetCard = ({ assest, onReset }: TProps) => {
@@ -27,11 +27,17 @@ const AssetCard = ({ assest, onReset }: TProps) => {
       onDelete(assest.id);
     }
   };
-  const buyPrice = Number(assest.buy_price || 0);
-  const amount = Number(assest.amount || 0);
 
-  const profitRate = ((amount - buyPrice) / buyPrice) * 100;
+  const buyPrice = Number(assest.buy_price || 0); // 매수가
+  const currentPrice = Number(assest.price || 0); // 현재가
+  const amount = Number(assest.amount || 0); // 수량
 
+  // 총 매수 금액 & 총 현재 가치
+  const totalBuyPrice = buyPrice * amount;
+  const totalCurrentValue = currentPrice * amount;
+
+  // 총 손익 (수익 금액)
+  const totalProfit = totalCurrentValue - totalBuyPrice;
   return (
     <Wrap>
       {isPending && <Loading text="일지에서 종목을 삭제하는 중..." />}
@@ -51,10 +57,13 @@ const AssetCard = ({ assest, onReset }: TProps) => {
           매수가 <span className="font-semibold">${buyPrice}</span>
         </p>
         <p>
-          현재가 <span className="font-semibold">${amount}</span>
+          현재가 <span className="font-semibold">${currentPrice}</span>
         </p>
-        <RateText $isRed={profitRate < 0}>
-          수익률 {profitRate.toFixed(1)}%
+        <p>
+          수량 <span className="font-semibold">${amount}</span>
+        </p>
+        <RateText $isRed={totalProfit < 0}>
+          수익률 {totalProfit.toFixed(2)}%
         </RateText>
       </div>
     </Wrap>

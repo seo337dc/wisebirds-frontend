@@ -33,7 +33,6 @@ const ViewDiaryCreate = ({ onClose }: TProps) => {
     mutationKey: ["AssetApi.addAssetsByDiary"],
     mutationFn: AssetApi.addAssetsByDiary,
     onSuccess: () => {
-      alert("일지를 추가하였습니다.");
       closeAction();
     },
     onError: () => alert("일지에 종목 추가를 실패하였습니다."),
@@ -48,7 +47,8 @@ const ViewDiaryCreate = ({ onClose }: TProps) => {
         closeAction();
         return;
       }
-      if (data) {
+
+      const addAllFunc = async () => {
         assets.forEach((asset) => {
           const paramAsset: ModelAssetsReq = {
             diary_id: data.id,
@@ -57,6 +57,13 @@ const ViewDiaryCreate = ({ onClose }: TProps) => {
             buy_price: asset.buy_price,
           };
           addAssets(paramAsset);
+        });
+      };
+
+      if (data) {
+        addAllFunc().then(() => {
+          alert("일지를 추가하였습니다.");
+          closeAction();
         });
       }
     },
