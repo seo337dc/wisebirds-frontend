@@ -1,9 +1,7 @@
 import { styled } from "styled-components";
 import moment from "moment";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import { Colors } from "@/util/constant";
-import { useDiaryStore } from "@/store/diaryStore";
 
 import type { ModelDiary } from "@/model/diary";
 
@@ -12,16 +10,9 @@ type TProps = {
 };
 
 const DetailSection = ({ diary }: TProps) => {
-  const { clearDiary } = useDiaryStore();
-
   return (
     <Wrap>
       <Header>
-        <AiOutlineArrowLeft
-          className="cursor-pointer"
-          size={24}
-          onClick={clearDiary}
-        />
         <Date>
           {moment(diary.date || diary.created_at).format("YYYY-MM-DD hh:mm")}
         </Date>
@@ -51,7 +42,7 @@ const Header = styled.div`
   width: 100%;
   padding: 10px;
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   align-items: center;
   border-bottom: 2px solid ${Colors.Neutral3};
 `;
