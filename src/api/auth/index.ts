@@ -7,7 +7,7 @@ import {
 import { apiClient } from "..";
 
 export class AuthApi {
-  // 로그인 api
+  // 로그인 API
   public static async siginIn(
     params: ModelSignInReq,
     signal?: AbortSignal
@@ -18,7 +18,7 @@ export class AuthApi {
     });
   }
 
-  // 회원가입 api
+  // 회원가입 API
   public static async signUp(
     params: ModelSignUpReq,
     signal?: AbortSignal

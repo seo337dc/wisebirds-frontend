@@ -12,7 +12,7 @@ type TProps = {
 };
 const DetailAssetSection = ({ diaryId }: TProps) => {
   const { authInfo } = useAuthStore();
-  const { data: assets } = useQuery({
+  const { data: assets, refetch } = useQuery({
     queryKey: ["AssetApi.list"],
     queryFn: () => AssetApi.listByDiary(diaryId),
     enabled: !!authInfo?.token,
@@ -24,7 +24,7 @@ const DetailAssetSection = ({ diaryId }: TProps) => {
       <Title>투자한 종목들</Title>
       <Container>
         {assets.map((asset) => (
-          <AssetCard key={asset.id} assest={asset} />
+          <AssetCard key={asset.id} assest={asset} onReset={refetch} />
         ))}
       </Container>
     </Wrap>

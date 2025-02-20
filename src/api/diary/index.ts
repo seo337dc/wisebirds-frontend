@@ -2,12 +2,14 @@ import { ModelDiary, TCreateDiary } from "@/model/diary";
 import { apiClient } from "..";
 
 export class DiaryApi {
+  // 투자일지 목록 조회 API
   public static async list(signal?: AbortSignal): Promise<ModelDiary[]> {
     return await apiClient.get<ModelDiary[]>("/diaries.json", {
       signal,
     });
   }
 
+  // 투자일지 추가 API
   public static async create(
     params: TCreateDiary,
     signal?: AbortSignal
@@ -23,5 +25,10 @@ export class DiaryApi {
       },
       signal,
     });
+  }
+
+  // 투자일지 추가 API
+  public static async deleteDiary(diaryId: number): Promise<void> {
+    return await apiClient.delete<void>(`/diaries/${diaryId}.json`);
   }
 }

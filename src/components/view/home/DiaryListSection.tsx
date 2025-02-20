@@ -16,7 +16,11 @@ type TProps = {
 const DiaryListSection = ({ token }: TProps) => {
   const { diary: detailDiary } = useDiaryStore();
 
-  const { data: diaries, isFetching } = useQuery({
+  const {
+    data: diaries,
+    isFetching,
+    refetch,
+  } = useQuery({
     queryKey: ["DiaryApi.list", token],
     queryFn: () => DiaryApi.list(),
     initialData: [],
@@ -30,7 +34,7 @@ const DiaryListSection = ({ token }: TProps) => {
   }, [detailDiary]);
 
   if (detailDiary) {
-    return <ViewDiaryDetail diary={detailDiary} />;
+    return <ViewDiaryDetail diary={detailDiary} onReset={refetch} />;
   }
 
   return (

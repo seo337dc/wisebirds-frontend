@@ -17,7 +17,7 @@ interface AddDiaryAssetRes {
 }
 
 export class AssetApi {
-  // 일지에 등록한 자산목록
+  // 투자일지에 속해 있는 자산목록 확인 API
   public static async listByDiary(
     diaryId: number
   ): Promise<ModelAssetByDiary[]> {
@@ -26,11 +26,12 @@ export class AssetApi {
     );
   }
 
-  // 자산 목록
+  // 자산종목 정보 조회 API
   public static async list(): Promise<ModelAssetRes[]> {
     return await apiClient.get<ModelAssetRes[]>(`/assets.json`);
   }
 
+  // 투자일지 목록에 자산 추가 API
   public static async addAssetsByDiary(params: ModelAssetsReq): Promise<any> {
     const formData = new URLSearchParams();
     formData.append("diary_asset[diary_id]", String(params.diary_id));
@@ -47,5 +48,10 @@ export class AssetApi {
         },
       }
     );
+  }
+
+  // 투자 일지 자산 삭제 API
+  public static async deleteAssetByDiary(assetId: number): Promise<void> {
+    return await apiClient.delete<void>(`/diary_assets/${assetId}.json`);
   }
 }
