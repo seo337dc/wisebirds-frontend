@@ -63,5 +63,5 @@ const Content = styled.div`
   text-overflow: ellipsis;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  white-space: normal;
+  white-space: pre-wrap;
 `;
