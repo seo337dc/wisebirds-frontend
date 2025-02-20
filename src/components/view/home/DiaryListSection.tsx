@@ -59,8 +59,8 @@ const Wrap = styled.section`
 
 const ListContainer = styled.div`
   width: 100%;
-  max-width: 1200px; /* 최대 너비 제한 */
-  justify-content: center; /* 요소 개수가 적을 때 중앙 정렬 */
+  max-width: 1200px;
+  justify-content: center;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));

@@ -85,9 +85,9 @@ const Title = styled.p`
 
 const Container = styled.div`
   width: 100%;
-  max-width: 1200px; /* 최대 너비 제한 */
+  max-width: 1200px;
   padding: 10px;
-  justify-content: center; /* 요소 개수가 적을 때 중앙 정렬 */
+  justify-content: center;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
