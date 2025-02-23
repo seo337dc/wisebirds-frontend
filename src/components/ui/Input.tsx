@@ -1,5 +1,5 @@
-import { useState } from "react";
-import * as S from "./Input.styles";
+import { Colors } from "@/util/constant";
+import { styled } from "styled-components";
 
 type TProps = {
   value: string;
@@ -14,7 +14,7 @@ type TProps = {
  */
 const Input = ({ value, placeholder, onChange, disable, isLine }: TProps) => {
   return (
-    <S.StyledInput
+    <StyledInput
       value={value}
       placeholder={placeholder || "입력하세요."}
       onChange={(e) => onChange && onChange(e.target.value)}
@@ -26,46 +26,15 @@ const Input = ({ value, placeholder, onChange, disable, isLine }: TProps) => {
 
 export default Input;
 
-export const InputPassword = ({ value, placeholder, onChange }: TProps) => {
-  const [isShow, setIsShow] = useState(false);
-  return (
-    <div className={"w-full relative"}>
-      <S.StyledInput
-        type={isShow ? "text" : "password"}
-        placeholder={placeholder}
-        onChange={(e) => onChange && onChange(e.target.value)}
-        value={value}
-      />
-      <S.EyeImg
-        onClick={() => setIsShow(!isShow)}
-        src="/assets/images/eye_off.png"
-        alt="eye_off"
-      />
-    </div>
-  );
-};
+const StyledInput = styled.input<{ $isLine?: boolean }>`
+  width: 100%;
 
-/**
- * textarea
- */
-
-export const InputTextarea = ({
-  value,
-  placeholder,
-  onChange,
-  rows = 10,
-  resize = "none",
-}: TProps & {
-  rows?: number;
-  resize?: "none" | "vertical" | "horizontal" | "both";
-}) => {
-  return (
-    <S.StyledTextarea
-      value={value}
-      placeholder={placeholder || "내용을 입력하세요."}
-      onChange={(e) => onChange && onChange(e.target.value)}
-      rows={rows}
-      $resize={resize}
-    />
-  );
-};
+  background-color: ${Colors.White};
+  border-radius: 5px;
+  font-size: 16px;
+  color: #8d94a0;
+  padding: 10px 12px;
+  border: 1px solid
+    ${({ $isLine }) => ($isLine ? Colors.Neutral3 : Colors.White)};
+  outline: none;
+`;

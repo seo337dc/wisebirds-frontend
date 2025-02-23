@@ -1,5 +1,5 @@
-import ViewHome from "@/components/view/home/ViewHome";
+import ViewBoardHome from "@/components/view/board/ViewBoardHome";
 
 export default function Home() {
-  return <ViewHome />;
+  return <ViewBoardHome />;
 }

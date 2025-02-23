@@ -1,13 +1,20 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { AiOutlineDelete, AiOutlineHolder } from "react-icons/ai";
+import { AiOutlineForm } from "react-icons/ai";
+import { BsArrowsMove } from "react-icons/bs";
 
 import Input from "@/components/ui/Input";
 import Text from "@/components/ui/Text";
 import { Colors } from "@/util/constant";
 
-// 드래그 가능 컴포넌트
-const SortableBoard = ({ board, updateBoard, deleteBoard }: any) => {
+import type { Board } from "@/model/board";
+
+type TProps = {
+  board: Board;
+  updateBoard: (id: string, title: string) => void;
+  onDetail: (boardData) => void;
+};
+const SortableBoard = ({ board, updateBoard, onDetail }: TProps) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: board.id });
 
@@ -22,7 +29,7 @@ const SortableBoard = ({ board, updateBoard, deleteBoard }: any) => {
       style={style}
       className="bg-white shadow-md p-4 rounded flex justify-between items-center"
     >
-      <AiOutlineHolder
+      <BsArrowsMove
         className="cursor-grab mr-4"
         color={Colors.Red}
         size={20}
@@ -36,10 +43,10 @@ const SortableBoard = ({ board, updateBoard, deleteBoard }: any) => {
         onChange={(value) => updateBoard(board.id, value)}
       />
 
-      <AiOutlineDelete
+      <AiOutlineForm
         className="cursor-pointer"
         size={20}
-        onClick={() => deleteBoard(board.id)}
+        onClick={() => onDetail(board)}
       />
     </div>
   );

@@ -1,5 +1,5 @@
+import { styled } from "styled-components";
 import { Colors } from "@/util/constant";
-import * as S from "./Button.styles";
 
 type TProps = {
   onClick?: () => void;
@@ -33,7 +33,7 @@ const Button = ({
   };
 
   return (
-    <S.ButtonWrap
+    <ButtonWrap
       className={className}
       disabled={disabled}
       onClick={handleClick}
@@ -45,38 +45,38 @@ const Button = ({
       $textSize={textSize}
     >
       {children}
-    </S.ButtonWrap>
+    </ButtonWrap>
   );
 };
 
 export default Button;
 
-type TPropsLinkBtn = {
-  href: string;
-  children: React.ReactNode;
-  currentPage: boolean;
-};
-export const LinkButton = ({ href, children, currentPage }: TPropsLinkBtn) => {
-  return (
-    <S.LinkText href={href} $currentPage={currentPage}>
-      {children}
-    </S.LinkText>
-  );
-};
+const ButtonWrap = styled.button<{
+  width: string;
+  height: string;
+  color: string;
+  $bgColor: string;
+  $borderColor?: string;
+  $textSize?: string;
+}>`
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 
-type TLineBtnProps = {
-  onClick: () => void;
-  children: React.ReactNode;
-};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 
-export const LineButton = ({ onClick, children }: TLineBtnProps) => {
-  return <S.LineBtn onClick={onClick}>{children}</S.LineBtn>;
-};
+  border-radius: 8px;
+  color: ${({ color }) => color};
+  background-color: ${(props) =>
+    props.disabled ? Colors.NeutralE : props.$bgColor};
+  border: ${({ $borderColor }) =>
+    $borderColor ? `1px solid ${$borderColor}` : "none"};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
 
-type TBadgeBtnProps = {
-  href: string;
-  children: React.ReactNode;
-};
-export const BadgeButton = ({ href, children }: TBadgeBtnProps) => {
-  return <S.BadgeBtn href={`${href}`}>{children}</S.BadgeBtn>;
-};
+  font-size: ${({ $textSize }) => $textSize};
+  font-weight: 400;
+
+  transition: background-color 0.3s;
+`;
