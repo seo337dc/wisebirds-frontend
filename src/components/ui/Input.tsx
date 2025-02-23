@@ -6,18 +6,20 @@ type TProps = {
   onChange?: (value: string) => void;
   placeholder?: string;
   disable?: boolean;
+  isLine?: boolean;
 };
 
 /**
  * default input 컴포넌트
  */
-const Input = ({ value, placeholder, onChange, disable }: TProps) => {
+const Input = ({ value, placeholder, onChange, disable, isLine }: TProps) => {
   return (
     <S.StyledInput
       value={value}
       placeholder={placeholder || "입력하세요."}
       onChange={(e) => onChange && onChange(e.target.value)}
       disabled={disable}
+      $isLine={isLine}
     />
   );
 };

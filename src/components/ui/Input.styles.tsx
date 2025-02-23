@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { Colors } from "@/util/constant";
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<{ $isLine?: boolean }>`
   width: 100%;
 
   background-color: ${Colors.White};
@@ -10,7 +10,8 @@ export const StyledInput = styled.input`
   font-size: 16px;
   color: #8d94a0;
   padding: 10px 12px;
-  border: 1px solid ${Colors.Neutral3};
+  border: 1px solid
+    ${({ $isLine }) => ($isLine ? Colors.Neutral3 : Colors.White)};
   outline: none;
 `;
 
