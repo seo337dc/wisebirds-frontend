@@ -19,7 +19,7 @@ const AddTodoSection = ({ boardId }: TProps) => {
   };
 
   return (
-    <div className="flex gap-2 mt-2">
+    <div className="flex items-center gap-2 mt-2">
       <Input
         value={text}
         onChange={(value) => setText(value)}
