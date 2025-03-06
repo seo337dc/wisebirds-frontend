@@ -1,5 +1,4 @@
 import { useRouter } from "next/navigation";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import Button from "@/components/ui/Button";
 
@@ -7,6 +6,7 @@ import { Colors } from "@/util/constant";
 import { Board } from "@/model/board";
 import { useTodoStore } from "@/store/useTodoStore";
 import { useBoardStore } from "@/store/useBoardStore";
+import { AiOutlineArrowLeft } from "react-icons/ai";
 
 type Props = {
   board: Board;

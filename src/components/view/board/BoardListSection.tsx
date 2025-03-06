@@ -12,7 +12,7 @@ const BoardListSection = () => {
   const router = useRouter();
   const { boards, updateBoard, updateBoardOrder } = useBoardStore();
 
-  // ✅ 드래그 종료 시 순서 업데이트
+  // 드래그 종료 시 순서 업데이트
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
