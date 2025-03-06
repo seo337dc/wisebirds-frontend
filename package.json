@@ -12,6 +12,8 @@
     "@dnd-kit/accessibility": "^3.1.1",
     "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
+    "@tanstack/react-query": "^5.67.1",
+    "@tanstack/react-query-devtools": "^5.67.1",
     "@types/styled-components": "^5.1.34",
     "next": "14.2.7",
     "npm": "^11.1.0",
