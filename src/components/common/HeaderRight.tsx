@@ -3,17 +3,15 @@ import { Select, Typography, Avatar, Popconfirm } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import { useAuth } from "@/hook/useQuery/useAuth";
+import { useRoleStore } from "@/store/useRoleStore";
 
 import { AUTH_MENUT } from "./constant";
 
 const { Text } = Typography;
 
-type TProps = {
-  authority: string;
-  handleAuthority: (value: string) => void;
-};
-const HeaderRight = ({ authority, handleAuthority }: TProps) => {
+const HeaderRight = () => {
   const pathName = usePathname();
+  const { role, setRole } = useRoleStore();
 
   const { data } = useAuth();
 
@@ -49,9 +47,9 @@ const HeaderRight = ({ authority, handleAuthority }: TProps) => {
       <Select
         className="w-[120px]"
         defaultValue="authority"
-        value={authority}
+        value={role}
         options={options}
-        onChange={handleAuthority}
+        onChange={(roleValue) => setRole(roleValue)}
       />
     </div>
   );
