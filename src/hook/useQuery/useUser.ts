@@ -13,7 +13,7 @@ export const useUpdateUser = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: ["/users/update"], // ✅ 변경되는 API 키
+    mutationKey: ["/users/update"],
     mutationFn: ({
       id,
       updateUser,

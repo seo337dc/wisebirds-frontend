@@ -11,7 +11,10 @@ import {
 } from "antd";
 
 import HeaderRight from "./HeaderRight";
+import ErrorModal from "../template/ErrorModal";
+
 import { useRoleStore } from "@/store/useRoleStore";
+import { useErrorStore } from "@/store/useErrorStore";
 
 import { MENU_TIEMS } from "./constant";
 
@@ -30,12 +33,14 @@ const Layout = ({ children }: TProps) => {
   const pathName = usePathname();
 
   const { role } = useRoleStore();
+  const { isError } = useErrorStore();
 
   const items = role === "admin" ? MENU_TIEMS.concat(menuUser) : MENU_TIEMS;
   const title = items.find((item) => item.key === pathName)?.title;
 
   return (
     <div className="relative min-h-screen">
+      {isError && <ErrorModal />}
       <LayoutContent>
         <Header className="flex justify-center">
           <Menu
