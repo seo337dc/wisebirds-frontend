@@ -51,11 +51,12 @@ const Layout = ({ children }: TProps) => {
           <HeaderRight />
         </Header>
         <Content className="px-5 py-5">
-          <Breadcrumb className="my-4 mx-0">
-            <Breadcrumb.Item>
-              <Typography.Title level={4}>{title}</Typography.Title>
-            </Breadcrumb.Item>
-          </Breadcrumb>
+          <Breadcrumb
+            className="my-4 mx-0"
+            items={[
+              { title: <Typography.Title level={4}>{title}</Typography.Title> },
+            ]}
+          />
 
           <Wrap $bg={colorBgContainer} $borderRadius={borderRadiusLG}>
             {children}

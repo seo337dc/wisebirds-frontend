@@ -11,8 +11,9 @@ type TProps = {
   page: number;
   size: number;
   handlePage: (value: number) => void;
+  onClickEdit: (user: User) => void;
 };
-const TableSection = ({ page, size, handlePage }: TProps) => {
+const TableSection = ({ page, size, handlePage, onClickEdit }: TProps) => {
   const { data, isFetching: loadingData } = useUsers(page, size);
 
   const columns: ColumnsType<User> = [
@@ -27,7 +28,7 @@ const TableSection = ({ page, size, handlePage }: TProps) => {
           <Button
             color="primary"
             variant="link"
-            onClick={() => console.log("수정 버튼 클릭:", record)}
+            onClick={() => onClickEdit(record)}
           >
             수정
           </Button>
