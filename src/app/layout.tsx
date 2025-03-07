@@ -7,6 +7,7 @@ import StyledComponentsRegistry from "@/styles/StyledComponentsRegistry";
 import type { Metadata } from "next";
 
 import "./globals.css";
+import "antd/dist/reset.css"; // Ant Design 초기화 스타일
 
 export const metadata: Metadata = {
   title: "Wirds Birds Test",
