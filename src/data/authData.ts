@@ -1,4 +1,4 @@
-import type { Auth } from "@/model/auth";
+import { Auth } from "@/model/auth";
 
 export const mockAuth: Auth = {
   id: 1,

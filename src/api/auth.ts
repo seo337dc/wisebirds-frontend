@@ -1,5 +1,5 @@
 import { mockAuth } from "@/data/authData";
-import { Auth } from "@/model/auth";
+import type { Auth } from "@/model/auth";
 
 const AuthApi = {
   /**
