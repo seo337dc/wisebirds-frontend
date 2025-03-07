@@ -1,3 +1,5 @@
+import { CampaignObj } from "@/model/campaign";
+
 export const Colors = {
   Black: "#000000",
   White: "#ffffff",
@@ -16,4 +18,14 @@ export const Colors = {
   Neutral3: "#BEBEBE",
   Neutral5: "#505050",
   NeutralE: "#E0E0E0",
+};
+
+export const campaignObjectiveLabels: Record<CampaignObj, string> = {
+  WEBSITE_CONVERSIONS: "웹사이트 전환",
+  WEBSITE_TRAFFIC: "웹사이트 트래픽",
+  SALES: "판매",
+  APP_INSTALLATION: "앱설치",
+  LEAD: "리드",
+  BRAND: "브랜드 인지도 및 도달 범위",
+  VIDEO_VIEWS: "동영상 조회",
 };
