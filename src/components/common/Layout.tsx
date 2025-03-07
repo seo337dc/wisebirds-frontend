@@ -1,9 +1,17 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Layout as LayoutContent, Menu, theme } from "antd";
+import { usePathname, useRouter } from "next/navigation";
+import { styled } from "styled-components";
+import {
+  Breadcrumb,
+  Layout as LayoutContent,
+  Menu,
+  theme,
+  Typography,
+} from "antd";
+
 import HeaderRight from "./HeaderRight";
+import { useRoleStore } from "@/store/useRoleStore";
 
 import { MENU_TIEMS } from "./constant";
 
@@ -19,17 +27,12 @@ const Layout = ({ children }: TProps) => {
   } = theme.useToken();
 
   const router = useRouter();
+  const pathName = usePathname();
 
-  const [authority, setAuthority] = useState("admin");
+  const { role } = useRoleStore();
 
-  const handleAuthority = (authorityValue: string) => {
-    setAuthority(authorityValue);
-  };
-
-  const items =
-    authority === "admin"
-      ? MENU_TIEMS.concat({ label: "사용자", key: "/user" })
-      : MENU_TIEMS;
+  const items = role === "admin" ? MENU_TIEMS.concat(menuUser) : MENU_TIEMS;
+  const title = items.find((item) => item.key === pathName)?.title;
 
   return (
     <div className="relative min-h-screen">
@@ -40,26 +43,23 @@ const Layout = ({ children }: TProps) => {
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={["/"]}
+            selectedKeys={pathName === "/" ? undefined : [pathName]}
             items={items}
             onClick={(e) => router.push(e.key)}
           />
 
-          <HeaderRight
-            authority={authority}
-            handleAuthority={handleAuthority}
-          />
+          <HeaderRight />
         </Header>
-        <Content className="px-5 py-10">
-          <div
-            style={{
-              background: colorBgContainer,
-              minHeight: "85vh",
-              padding: 24,
-              borderRadius: borderRadiusLG,
-            }}
-          >
+        <Content className="px-5 py-5">
+          <Breadcrumb className="my-4 mx-0">
+            <Breadcrumb.Item>
+              <Typography.Title level={4}>{title}</Typography.Title>
+            </Breadcrumb.Item>
+          </Breadcrumb>
+
+          <Wrap $bg={colorBgContainer} $borderRadius={borderRadiusLG}>
             {children}
-          </div>
+          </Wrap>
         </Content>
       </LayoutContent>
     </div>
@@ -67,3 +67,16 @@ const Layout = ({ children }: TProps) => {
 };
 
 export default Layout;
+
+const Wrap = styled.div<{ $bg: string; $borderRadius: number }>`
+  background: ${({ $bg }) => $bg};
+  min-height: 85vh;
+  padding: 24px;
+  border-radius: ${({ $borderRadius }) => $borderRadius};
+`;
+
+const menuUser = {
+  label: "사용자",
+  key: "/user",
+  title: "사용자 관리",
+};
