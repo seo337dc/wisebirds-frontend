@@ -2,12 +2,30 @@
 
 1. 초기 세팅 : 1시간 (사용하던 방식으로 재활용 및 필요한 라이브러리 및 파일구조 세팅)
 2. api 세팅 : 약 1.5시간 (목데이터 생성 및 각 api 관련 코드 작성)
+3. Header ui 및 기능 개발 : 약 1시간 (antd 라이브러리 세팅, 컴포넌트 개발, 메뉴 권한, 내 정보, 권한 설정)
 
 ## 과제 요구사항
 
-### 1. 로그인
+### 1. 혜더
 
-1. 보드를 생성할 수 있어야 합니다.
+1. 로고
+
+- Wisebirds 표기
+
+2. 메뉴 권한
+
+- 캠페인 : 어드민, 매니저, 뷰어 Select 박스 노출
+- 사용자 : 어드민만 노출
+
+3. 내 정보
+
+- 클릭 시 팝업으로 이름, 메일(아이디), 회사 이름 표기
+- api 목 데이터로 데이터 노출
+
+4. 권한 설정
+
+- 어드민, 매니저, 뷰어 선택하여 권한을 변경 (Select 박스 사용)
+- 매니저, 뷰어 선택 시 사용자 메뉴는 제거 & 접근 불가
 
 ### 2. 캠페인 리스트 조회
 
@@ -29,9 +47,9 @@
 
 - Framework: Next.js 14
 - Core: Typescript
-- State Management: Zustand
+- State Management: Zustand, React-query
 - Styling: Tailwind CSS, Styled-components
-- library: dnd-kit (순서 및 위치 변경 라이브러리)
+- library: antd-ui
 
 ## 📂 폴더 구조
 
