@@ -3,7 +3,7 @@
 import { useState } from "react";
 import TableSection from "./TableSection";
 
-const ViewCampaign = () => {
+const ViewUser = () => {
   const [page, setPage] = useState(0);
   const handlePage = (pageValue) => setPage(pageValue);
 
@@ -14,4 +14,4 @@ const ViewCampaign = () => {
   );
 };
 
-export default ViewCampaign;
+export default ViewUser;
