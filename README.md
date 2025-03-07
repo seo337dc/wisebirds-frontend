@@ -29,7 +29,15 @@
 
 ### 2. 캠페인 리스트 조회
 
-1. 할 일은, 하나의 텍스트 박스를 가집니다. [완료]
+1. 테이블의 컬럼 위치 및 텍스트 : 각 요구사항에 맞게 적용(antd table의 align 적용)
+2. 캠페인 페이지 - 제목 : 캠페인 관리
+3. 캠페인 목록 리스트 노출 : 목록 목데이터 api 적용
+4. 상태 컬럼 :
+
+- 뷰어일 경우 클릭 방지
+- 상태 변경 api 적용
+
+5. 페이지네이션 : 25개 씩
 
 ### 3. 캠페인 상태 수정
 
@@ -55,13 +63,14 @@
 
 📂 src
 ┣ 📂 app
-┃ ┣ page.tsx # 메인 및 board 페이지
-┃ ┣ 📂 detail/[slug]/page.tsx # board 상세 페이지
+┃ ┣ page.tsx # 메인 페이지 (빈 페이지)
+┃ ┣ 📂 campaign/page.tsx # 캠페인 목록 페이지
 ┣ 📂 components
 ┃ ┣ 📂 common # Layout 관리 컴포넌트
 ┃ ┣ 📂 template # 각 화면에 적용되는 template (보드 생성 Modal)
-┃ ┣ 📂 ui # 재사용 가능한 UI 컴포넌트 (Button, Input, Modal ... 등)
-┃ ┣ 📂 view # board, board-detail
+┃ ┣ 📂 view
+┃ ┃ ┣ 📂 home # 메인 페이지 관련된 view 컴포넌트
+┃ ┃ ┣ 📂 campaign # 캠페인 페이지 관련된 view 컴포넌트
 ┣ 📂 model # TypeScript 인터페이스 정의
 ┣ 📂 store # Zustand 상태 관리
 ┣ 📂 styles # 글로벌 스타일 및 스타일컴포넌트 관리
