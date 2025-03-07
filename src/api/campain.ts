@@ -7,7 +7,10 @@ const CampaignApi = {
    * 캠페인 리스트 조회 api
    * [GET] : /api/campaigns
    */
-  getCampaigns: async (page: number = 0, size: number = 10) => {
+  getCampaigns: async (
+    page: number = 0,
+    size: number = 10
+  ): Promise<PaginatedResponse<Campaign>> => {
     const start = page * size;
     const end = start + size;
     const paginatedCampaigns = mockCampaigns.slice(start, end);
@@ -34,7 +37,10 @@ const CampaignApi = {
    * 캠페인 상태 수정
    * [PATCH] : /api/campaigns/${id}
    */
-  updateCampaignEnabled: async (id: number, enabled: boolean) => {
+  updateCampaignEnabled: async (
+    id: number,
+    enabled: boolean
+  ): Promise<Campaign> => {
     const campaignIndex = mockCampaigns.findIndex(
       (campaign) => campaign.id === id
     );

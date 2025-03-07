@@ -18,3 +18,5 @@ export type CampaignObj =
   | "LEAD"
   | "BRAND"
   | "VIDEO_VIEWS";
+
+export type CampaignsReqModel = { id: number; enabled: boolean };
