@@ -1,7 +1,3 @@
-export type TModalProps = {
-  onClose: () => void;
-};
-
 export type PaginatedResponse<T> = {
   content: T[];
   total_elements: number;
