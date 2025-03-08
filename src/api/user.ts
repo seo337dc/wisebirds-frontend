@@ -1,6 +1,6 @@
 import { mockUsers } from "@/data/userData";
 import type { PaginatedResponse } from "@/model/common";
-import type { User } from "@/model/user";
+import type { User, UserCreate } from "@/model/user";
 
 const UserApi = {
   /**
@@ -10,7 +10,8 @@ const UserApi = {
   getUsers: async (page: number = 0, size: number = 10) => {
     const start = page * size;
     const end = start + size;
-    const paginatedUsers = mockUsers.slice(start, end);
+    const reversedUsers = [...mockUsers].reverse();
+    const paginatedUsers = reversedUsers.slice(start, end);
 
     return new Promise<PaginatedResponse<User>>((resolve) => {
       setTimeout(() => {
@@ -34,12 +35,7 @@ const UserApi = {
    * 사용자 생성
    * - [POST] : /api/users
    */
-  createUser: async (userData: {
-    name: string;
-    email: string;
-    password: string;
-    repeat_password: string;
-  }) => {
+  createUser: async (userData: UserCreate) => {
     return new Promise<{ result: boolean; id: number }>((resolve, reject) => {
       setTimeout(() => {
         const { name, email } = userData;
