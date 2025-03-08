@@ -7,6 +7,8 @@ import { FormItem } from "../ui/FormItem";
 
 import { useUpdateUser } from "@/hook/useQuery/useUser";
 
+import { REG_NAME } from "@/util/constant";
+
 import type { User } from "@/model/user";
 
 type UserEditForm = Pick<User, "email" | "name" | "id">;
@@ -26,8 +28,7 @@ const UserEditModal = ({ user, onClose, onSuccessAfter }: Props) => {
       return Promise.reject("이름을 입력해주세요.");
     }
 
-    const nameRegex = /^[가-힣a-zA-Z]{1,16}$/;
-    if (!nameRegex.test(value)) {
+    if (!REG_NAME.test(value)) {
       return Promise.reject(
         "이름을 올바르게 입력하세요. (숫자, 특수문자, 공백 입력 불가)"
       );
@@ -70,7 +71,7 @@ const UserEditModal = ({ user, onClose, onSuccessAfter }: Props) => {
       ]}
     >
       <Form form={form} layout="vertical">
-        <FormItem label="아이디" name="email">
+        <FormItem label="아이디(이메일)" name="email">
           <Input disabled />
         </FormItem>
 

@@ -29,3 +29,8 @@ export const campaignObjectiveLabels: Record<CampaignObj, string> = {
   BRAND: "브랜드 인지도 및 도달 범위",
   VIDEO_VIEWS: "동영상 조회",
 };
+
+export const REG_PWD =
+  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
+
+export const REG_NAME = /^[가-힣a-zA-Z]{1,16}$/;
