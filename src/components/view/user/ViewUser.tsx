@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from "react";
+import { Button, message } from "antd";
 import TableSection from "./TableSection";
-import type { User } from "@/model/user";
 import UserEditModal from "@/components/template/UserEditModal";
-import { message } from "antd";
+import UserCreateModal from "@/components/template/UserCreateModall";
+
+import type { User, UserCreate } from "@/model/user";
 
 const ViewUser = () => {
   const [messageApi, contextHolder] = message.useMessage();
 
   const [page, setPage] = useState(0);
   const [editUser, setEditUser] = useState<User | null>(null);
+  const [createUser, setCreateUser] = useState(false);
 
   const handlePage = (pageValue) => setPage(pageValue);
   const onClickEdit = (userInfo: User) => setEditUser(userInfo);
@@ -20,9 +23,34 @@ const ViewUser = () => {
     setEditUser(null);
   };
 
+  const onSuccessAfterCreate = (user: UserCreate) => {
+    messageApi.success(`${user.name} 사용자를 추가하였습니다.`);
+    setCreateUser(false);
+  };
+
+  const handleCreate = () => setCreateUser(true);
+
   return (
     <div>
       {contextHolder}
+
+      <div className="w-full text-right">
+        <Button
+          className="mb-4 w-[120px]"
+          type="primary"
+          size="large"
+          onClick={handleCreate}
+        >
+          추가
+        </Button>
+      </div>
+
+      {createUser && (
+        <UserCreateModal
+          onClose={() => setCreateUser(false)}
+          onSuccessAfter={onSuccessAfterCreate}
+        />
+      )}
       {editUser && (
         <UserEditModal
           user={editUser}
