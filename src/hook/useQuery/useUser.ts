@@ -42,3 +42,10 @@ export const useCreateUser = () => {
     },
   });
 };
+
+export const useCheckEmailExists = (email: string) => {
+  return useQuery({
+    queryKey: ["/users/check-email-exists", email],
+    queryFn: () => UserApi.checkEmailExists(email),
+  });
+};

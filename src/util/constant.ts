@@ -34,3 +34,5 @@ export const REG_PWD =
   /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
 
 export const REG_NAME = /^[가-힣a-zA-Z]{1,16}$/;
+
+export const REG_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

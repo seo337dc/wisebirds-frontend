@@ -1,9 +1,10 @@
 "use client";
 
-import { Modal, Form, Input, Button } from "antd";
+import { useState } from "react";
+import { Modal, Form, Input, Button, message } from "antd";
 import { FormItem } from "../ui/FormItem";
-import { useCreateUser } from "@/hook/useQuery/useUser";
-import { REG_NAME, REG_PWD } from "@/util/constant";
+import { useCheckEmailExists, useCreateUser } from "@/hook/useQuery/useUser";
+import { REG_EMAIL, REG_NAME, REG_PWD } from "@/util/constant";
 
 import type { UserCreate } from "@/model/user";
 
@@ -14,9 +15,37 @@ type Props = {
 
 const UserCreateModal = ({ onClose, onSuccessAfter }: Props) => {
   const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const [email, setEmail] = useState("");
+  const [emailCheck, setEmailCheck] = useState(false);
+
   const { mutate: createUser, isPending: loading } = useCreateUser();
+  const { refetch } = useCheckEmailExists(email);
+
+  const handleEmailCheck = async () => {
+    if (!email) {
+      messageApi.error("이메일을 입력해주세요.");
+      return;
+    }
+
+    await refetch().then((res) => {
+      if (res.data?.result) {
+        messageApi.error("이미 존재하는 이메일입니다.");
+        return;
+      }
+
+      messageApi.success("사용 가능한 이메일입니다.");
+      setEmailCheck(true);
+    });
+  };
 
   const handleSubmit = async () => {
+    if (!emailCheck) {
+      messageApi.error("이메일 중복 확인을 진행해주세요.");
+      return;
+    }
+
     try {
       const values: UserCreate = await form.validateFields();
       console.log(values);
@@ -30,6 +59,44 @@ const UserCreateModal = ({ onClose, onSuccessAfter }: Props) => {
       console.error("유효성 검사 실패:", error);
     }
   };
+
+  const validateEmail = (_: any, value: string) => {
+    if (!value) {
+      return Promise.reject("아이디(이메일)을 입력하세요.");
+    }
+
+    if (value.length < 9 || value.length > 50 || !REG_EMAIL.test(value)) {
+      return Promise.reject("올바른 이메일 주소를 입력하세요.");
+    }
+
+    return Promise.resolve();
+  };
+
+  const validatePassword = (_: any, value: string) => {
+    if (!value) {
+      return Promise.reject("비밀번호를 입력하세요.");
+    }
+
+    if (!REG_PWD.test(value)) {
+      return Promise.reject("8~15자 영문, 숫자, 특수문자를 사용하세요.");
+    }
+
+    return Promise.resolve();
+  };
+
+  const validateConfirmPassword = ({ getFieldValue }: any) => ({
+    validator(_: any, value: string) {
+      if (!value) {
+        return Promise.reject("비밀번호를 입력하세요.");
+      }
+
+      if (value !== getFieldValue("password")) {
+        return Promise.reject("비밀번호가 일치하지 않습니다.");
+      }
+
+      return Promise.resolve();
+    },
+  });
 
   return (
     <Modal
@@ -50,50 +117,47 @@ const UserCreateModal = ({ onClose, onSuccessAfter }: Props) => {
         </Button>,
       ]}
     >
+      {contextHolder}
+
       <Form form={form} layout="vertical">
         <FormItem
           label="아이디(이메일)"
           name="email"
-          rules={[
-            { required: true, message: "아이디(이메일)을 입력하세요." },
-            { type: "email", message: "올바른 이메일 형식이 아닙니다." },
-          ]}
+          rules={[{ validator: validateEmail }]}
         >
-          <Input placeholder="이메일 입력" />
+          <Input
+            placeholder="아이디(이메일) 입력"
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (emailCheck) setEmailCheck(false);
+              form.setFields([{ name: "email", errors: [] }]);
+            }}
+            addonAfter={
+              <Button
+                type="primary"
+                size="small"
+                onClick={handleEmailCheck}
+                disabled={!email || email.length < 9 || email.length > 50}
+              >
+                중복 확인
+              </Button>
+            }
+          />
         </FormItem>
 
         <FormItem
           label="비밀번호"
           name="password"
-          rules={[
-            { required: true, message: "비밀번호를 입력하세요." },
-            {
-              pattern: REG_PWD,
-              message: "영문, 숫자, 특수문자 조합 8~15자",
-            },
-          ]}
+          rules={[{ validator: validatePassword }]}
         >
-          <Input.Password placeholder="비밀번호 입력" />
+          <Input.Password placeholder="영문, 숫자, 특수문자 조합 8~15자" />
         </FormItem>
 
-        {/* 비밀번호 확인 */}
         <FormItem
           label="비밀번호 확인"
           name="confirmPassword"
           dependencies={["password"]}
-          rules={[
-            { required: true, message: "비밀번호를 입력하세요." },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(
-                  new Error("비밀번호가 일치하지 않습니다.")
-                );
-              },
-            }),
-          ]}
+          rules={[validateConfirmPassword]}
         >
           <Input.Password placeholder="비밀번호 확인" />
         </FormItem>
